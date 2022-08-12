@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">News</string>
+
+    <!-- region NetworkErrors -->
+    <string name="network_invalid_input">Invalid inputs.</string>
+    <string name="network_unauthorized">Session timed out, please login again.</string>
+    <string name="network_forbidden">You don\'t have the necessary permissions.</string>
+    <string name="network_not_found">The requested resource was not found.</string>
+    <string name="network_server_error">Service unavailable now, please try again later.</string>
+    <string name="network_time_out">Request timeout, please check your internet connection and try again.</string>
+    <string name="network_connection_error">No internet connection, please check your internet connection and try again.</string>
+    <string name="network_unexpected_response">Sorry, unexpected response from server.</string>
+    <string name="network_unknown_error">Unknown error occurred, please try again.</string>
+    <!-- endregion -->
+
+    <!--region HomeFragment-->
+    <string name="home_fr_news">News</string>
+    <string name="home_fr_latest_news">Latest News</string>
+    <!--endregion-->
+
+
+</resources>

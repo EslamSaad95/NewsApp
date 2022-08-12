@@ -1,0 +1,63 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+    id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
+}
+apply from: '../dependencies.gradle'
+
+
+android {
+    compileSdk 32
+    buildToolsVersion "31.0.0"
+    defaultConfig {
+        applicationId "com.example.News"
+        minSdk 21
+        targetSdk 32
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    buildFeatures {
+        viewBinding true
+        dataBinding true
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+
+    kotlinOptions {
+        jvmTarget = '11'
+        javaParameters = true
+    }
+
+
+}
+
+
+dependencies {
+    implementation appDependency.values()
+    kapt "com.google.dagger:hilt-android-compiler:2.42"
+    kapt "androidx.hilt:hilt-compiler:1.0.0"
+    kapt "androidx.room:room-compiler:2.3.0"
+
+}
+secrets {
+    propertiesFileName = "secrets.properties"
+    defaultPropertiesFileName = 'secrets.properties'
+}
+kapt {
+    correctErrorTypes = true
+}
+
