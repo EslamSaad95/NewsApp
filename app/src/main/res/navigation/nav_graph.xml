@@ -8,17 +8,17 @@
 
     <fragment
         android:id="@+id/home"
-        android:name="com.example.footballLeague.presentation.home.HomeFragment"
+        android:name="com.example.news.presentation.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/search"
-        android:name="com.example.footballLeague.presentation.search.SearchFragment"
+        android:name="com.example.news.presentation.search.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" />
     <fragment
         android:id="@+id/wishlist"
-        android:name="com.example.footballLeague.presentation.wishlist.WishlistFragment"
+        android:name="com.example.news.presentation.wishlist.WishlistFragment"
         android:label="fragment_wishlist"
         tools:layout="@layout/fragment_wishlist" />
 
