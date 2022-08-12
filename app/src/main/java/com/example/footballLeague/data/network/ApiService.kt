@@ -9,5 +9,5 @@ import retrofit2.http.QueryMap
 interface ApiService
 {
     @GET("top-headlines")
-    suspend fun getEgyptNews(@QueryMap queryMap:HashMap<String,String>):Response<NewsDto>
+    suspend fun getTopHeadlinesNews(@QueryMap queryMap:HashMap<String,String>):Response<NewsDto>
 }
