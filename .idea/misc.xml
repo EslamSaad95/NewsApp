@@ -14,8 +14,13 @@
         <entry key="..\:/Projects/Tasks/Football League/app/src/main/res/layout/item_season.xml" value="0.3645833333333333" />
         <entry key="..\:/Projects/Tasks/Football League/app/src/main/res/layout/item_team.xml" value="0.3645833333333333" />
         <entry key="..\:/Projects/Tasks/Football League/app/src/main/res/menu/menu_toolbar.xml" value="0.29914529914529914" />
+        <entry key="..\:/Projects/Tasks/NewsTask/app/src/main/res/drawable/ic_nav_home.xml" value="0.2065" />
+        <entry key="..\:/Projects/Tasks/NewsTask/app/src/main/res/drawable/ic_nav_search.xml" value="0.2065" />
         <entry key="..\:/Projects/Tasks/NewsTask/app/src/main/res/drawable/selector_bottom_nav.xml" value="0.2065" />
         <entry key="..\:/Projects/Tasks/NewsTask/app/src/main/res/layout/activity_main.xml" value="0.17083333333333334" />
+        <entry key="..\:/Projects/Tasks/NewsTask/app/src/main/res/layout/fragment_home.xml" value="0.3619791666666667" />
+        <entry key="..\:/Projects/Tasks/NewsTask/app/src/main/res/layout/fragment_search.xml" value="0.34791666666666665" />
+        <entry key="..\:/Projects/Tasks/NewsTask/app/src/main/res/layout/fragment_wishlist.xml" value="0.3619791666666667" />
         <entry key="..\:/Projects/Tasks/NewsTask/app/src/main/res/menu/menu_home_bottom_navigation.xml" value="0.3619791666666667" />
         <entry key="..\:/Projects/Tasks/NewsTask/app/src/main/res/menu/menu_toolbar.xml" value="0.34791666666666665" />
         <entry key="..\:/Projects/Test Projects/MyCleanArch/app/src/main/res/layout/activity_main.xml" value="0.28425925925925927" />
