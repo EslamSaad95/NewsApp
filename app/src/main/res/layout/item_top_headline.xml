@@ -18,6 +18,7 @@
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:scaleType="fitXY"
             tools:background="@android:color/holo_green_dark"
             app:imageUrlR15="@{news.imageUrl}"/>
 
@@ -35,13 +36,15 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_size_12"
+            android:textSize="@dimen/text_size_14"
             android:text="@{news.title}"
+            android:textAlignment="viewStart"
             android:maxLines="2"
             android:ellipsize="end"
             android:paddingHorizontal="@dimen/margin_8"
             android:paddingVertical="@dimen/margin_8"
-            tools:text="Head Line Problem"/>
+            tools:text="Head Line Problem"
+            tools:ignore="RtlCompat" />
 
 
 

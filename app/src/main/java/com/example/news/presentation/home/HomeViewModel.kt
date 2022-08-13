@@ -25,6 +25,9 @@ class HomeViewModel @Inject constructor(private val useCase: TopHeadlinesUseCase
     private val _errorLiveData by lazy { MutableLiveData<ApiFailure>() }
     val errorLiveData get() = _errorLiveData
 
+    init {
+        getEgyptNews()
+    }
 
 
 

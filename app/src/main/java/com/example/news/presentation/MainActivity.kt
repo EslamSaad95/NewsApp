@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         initNavigation()
-
+        setOnDestinationChangedListener()
     }
 
     private fun initNavigation() {
@@ -37,4 +37,16 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         binding.navView.setupWithNavController(navController)
     }
+
+    private fun setOnDestinationChangedListener() {
+        navController.addOnDestinationChangedListener { _, destination, arguments ->
+            arguments?.let {
+                if (it.getBoolean("showToolbar")) showToolbar() else hideToolbar()
+            }
+        }
+    }
+
+    private fun hideToolbar() = supportActionBar?.hide()
+
+    private fun showToolbar() = supportActionBar?.show()
 }
