@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.example.news.R
 import com.example.news.databinding.FragmentHomeBinding
@@ -104,6 +106,12 @@ class HomeFragment : Fragment() {
         }
 
         TabLayoutMediator(binding.tbSlider, binding.vpSlider) { _, _ -> }.attach()
+        sliderAdapter.setOnClickListener { _, item, _ ->
+            findNavController().navigate(
+                R.id.actionHomeToNewsDetails,
+                bundleOf("detailsObj" to item)
+            )
+        }
 
 
     }
@@ -113,6 +121,12 @@ class HomeFragment : Fragment() {
         binding.rvLatestNews.apply {
             linearLayoutManager()
             adapter = latestNewsAdapter
+        }
+        latestNewsAdapter.setOnClickListener { _, item, _ ->
+            findNavController().navigate(
+                R.id.actionHomeToNewsDetails,
+                bundleOf("detailsObj" to item)
+            )
         }
     }
 

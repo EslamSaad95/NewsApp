@@ -1,6 +1,7 @@
 package com.example.news.domain.entity
 
 import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class TopHeadlinesEntity(
