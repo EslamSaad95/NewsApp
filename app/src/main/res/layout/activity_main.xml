@@ -14,7 +14,6 @@
         app:buttonGravity="center_vertical"
         app:contentInsetEndWithActions="@dimen/margin_18"
         app:layout_constraintTop_toTopOf="parent"
-        app:titleCentered="true"
         app:titleTextAppearance="@style/Toolbar.Title" />
 
     <androidx.fragment.app.FragmentContainerView

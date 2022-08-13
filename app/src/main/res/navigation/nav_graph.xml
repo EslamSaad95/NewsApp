@@ -9,12 +9,9 @@
     <fragment
         android:id="@+id/home"
         android:name="com.example.news.presentation.home.HomeFragment"
-        android:label="fragment_home"
+        android:label="@string/home_fr_news"
         tools:layout="@layout/fragment_home" >
 
-        <argument
-            android:name="showToolbar"
-            android:defaultValue="false" />
     </fragment>
     <fragment
         android:id="@+id/search"
