@@ -48,6 +48,10 @@ class SearchFragment : Fragment() {
         setViewsClickListeners()
     }
 
+    override fun onResume() {
+        super.onResume()
+        requireContext().hideKeyboard(requireView())
+    }
 
     private fun observeResultsLiveData() {
         viewModel.searchResultsLiveData.observe(viewLifecycleOwner) {
