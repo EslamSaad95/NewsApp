@@ -21,6 +21,7 @@
     <!--region SearchFragment-->
     <string name="search_fr_empty_search_results">No results</string>
     <string name="search_fr_validation_empty_keyword">Please enter search keyword</string>
+    <string name="search_fr_search_here">Search here</string>
     <!--endregion-->
 
 

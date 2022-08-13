@@ -73,6 +73,8 @@ class HomeFragment : Fragment() {
                     0,
                     0
                 )
+            else
+                binding.tvErrorMsg.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0)
             binding.tvErrorMsg.apply {
                 visible()
                 it.error?.let { text = it }

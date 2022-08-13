@@ -22,8 +22,8 @@
             android:id="@+id/svNews"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:defaultQueryHint="search"
             android:iconifiedByDefault="false"
+            android:queryHint="@string/search_fr_search_here"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:queryHint="search" />
@@ -32,6 +32,8 @@
             android:id="@+id/rvResults"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:paddingVertical="@dimen/margin_8"
             android:visibility='@{viewModel.searchResultsLiveData.size()==0? View.GONE : View.VISIBLE}'
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/svNews" />
@@ -49,7 +51,7 @@
             tools:visibility="gone" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvError_empty"
+            android:id="@+id/tvEmpty"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -57,10 +59,26 @@
             android:textAlignment="center"
             android:textColor="@color/black"
             android:visibility='@{viewModel.searchResultsLiveData.size()!=0? View.GONE : View.VISIBLE}'
+            app:drawableTopCompat="@drawable/ic_empty_search_results"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="gone" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvError"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingHorizontal="@dimen/margin_12"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="gone" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

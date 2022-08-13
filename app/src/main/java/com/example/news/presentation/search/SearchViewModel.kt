@@ -28,10 +28,18 @@ class SearchViewModel @Inject constructor(private val useCase: SearchUseCase) : 
         queryMap["q"] = keyWord
         _loadingLiveData.value = true
         viewModelScope.launch {
-            _loadingLiveData.value = false
+
             val response = useCase.getSearchResults(queryMap)
-            response.value?.let { _searchResultsLiveData.value = it }
-            _errorLiveData.value?.let { _errorLiveData.value = it }
+
+            response.value?.let {
+                _loadingLiveData.value = false
+                _searchResultsLiveData.value = it
+            }
+
+            _errorLiveData.value?.let {
+                _loadingLiveData.value = false
+                _errorLiveData.value = it
+            }
         }
     }
 
