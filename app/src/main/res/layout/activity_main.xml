@@ -32,7 +32,7 @@
         android:id="@+id/navView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:backgroundTint="@color/white"
+        app:backgroundTint="@color/cultured"
         app:itemIconTint="@color/selector_bottom_nav"
         app:labelVisibilityMode="unlabeled"
         app:layout_constraintBottom_toBottomOf="parent"

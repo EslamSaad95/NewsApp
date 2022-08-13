@@ -12,25 +12,24 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_marginTop="@dimen/margin_12"
-        android:layout_height="wrap_content">
-
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_12">
 
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardBackgroundColor="@color/white"
-            android:layout_marginTop="@dimen/margin_16"
             android:layout_marginStart="@dimen/margin_14"
-            app:cardCornerRadius="@dimen/_3sdp"
+            android:layout_marginTop="@dimen/margin_6"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="@dimen/_5sdp"
             app:cardElevation="0dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingVertical="@dimen/margin_10"
-                android:paddingStart="@dimen/_90sdp"
+                android:paddingVertical="@dimen/margin_8"
+                android:paddingStart="@dimen/_80sdp"
                 android:paddingEnd="@dimen/margin_8">
 
                 <com.google.android.material.textview.MaterialTextView
@@ -39,10 +38,11 @@
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
                     android:maxLines="3"
-                    android:minLines="2"
+                    android:minLines="3"
                     android:text="@{news.title}"
                     android:textAlignment="viewStart"
-                    android:textSize="@dimen/text_size_14"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_12"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -50,17 +50,20 @@
                     tools:text="News Title" />
 
                 <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_12"
                     android:text="@{news.date}"
+                    android:textAlignment="viewStart"
                     android:textColor="@color/dimGray"
                     android:textSize="@dimen/text_size_10"
+                    app:layout_constraintEnd_toStartOf="@id/ivFav"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tvNewsTitle"
+                    app:layout_constraintTop_toTopOf="@id/ivFav"
+                    app:layout_constraintBottom_toBottomOf="@id/ivFav"
                     tools:text="14 minutes" />
 
                 <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivFav"
                     android:layout_width="@dimen/_14sdp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_12"
@@ -71,10 +74,12 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
+
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ivNews"
-            android:layout_width="@dimen/_90sdp"
-            android:layout_height="@dimen/_90sdp"
+            android:layout_width="@dimen/_85sdp"
+            android:layout_height="@dimen/_85sdp"
+            android:scaleType="fitXY"
             app:imageUrlR15="@{news.imageUrl}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

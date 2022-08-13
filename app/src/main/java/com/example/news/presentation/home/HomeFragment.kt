@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
 import com.example.news.databinding.FragmentHomeBinding
 import com.example.news.presentation.extensions.linearLayoutManager
@@ -32,6 +33,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observeEgyptNewsSliderLiveData()
+        observeLatestNewsLiveData()
     }
 
 
@@ -39,6 +41,16 @@ class HomeFragment : Fragment() {
         viewModel.egyptNewsLiveData.observe(viewLifecycleOwner) {
             sliderAdapter.fill(it)
             initSliderVp()
+        }
+    }
+
+    private fun observeLatestNewsLiveData()
+    {
+        viewModel.latestNewsEntity.observe(viewLifecycleOwner){
+            it?.let {
+                latestNewsAdapter.fill(it)
+                initLatestNewsRv()
+            }
         }
     }
 
@@ -50,30 +62,7 @@ class HomeFragment : Fragment() {
         }
 
 
-        binding.vpSlider.setPageTransformer { page, position ->
-            val pageWidth: Int =
-                binding.vpSlider.measuredWidth - binding.vpSlider.paddingLeft - binding.vpSlider.paddingRight
-            val pageHeight: Int = binding.vpSlider.height
-            val paddingLeft: Int = binding.vpSlider.paddingLeft
-            val transformPos =
-                (page.left - (binding.vpSlider.scrollX + paddingLeft)) as Float / pageWidth
-
-            val normalizedposition = Math.abs(Math.abs(transformPos) - 1)
-            page.alpha = normalizedposition + 0.5f
-
-            val max = -pageHeight / 10
-
-            if (transformPos < -1) { // [-Infinity,-1)
-                // This page is way off-screen to the left.
-                page.translationY = 0F
-            } else if (transformPos <= 1) { // [-1,1]
-                page.translationY = max * (1 - Math.abs(transformPos))
-            } else { // (1,+Infinity]
-                // This page is way off-screen to the right.
-                page.setTranslationY(0)
-            }
-
-        }
+        binding.vpSlider.setPageTransformer(MarginPageTransformer(1500));
     }
 
 

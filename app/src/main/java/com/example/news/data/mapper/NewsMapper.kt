@@ -8,6 +8,6 @@ fun List<NewsDto.Article>.toEgyptNewsEntity(): List<EgyptNewsEntity> {
     return this.map { EgyptNewsEntity(it.urlToImage,it.title, date = it.publishedAt) }
 }
 
-fun List<NewsDto.Article>.ToLatestNews(): List<LatestNewsEntity> {
+fun List<NewsDto.Article>.toLatestNews(): List<LatestNewsEntity> {
     return this.map { LatestNewsEntity(it.urlToImage,it.title, date = it.publishedAt, description = it.description) }
 }
