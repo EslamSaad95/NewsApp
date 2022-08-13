@@ -28,10 +28,10 @@
                     android:id="@+id/tvTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_12"
+                    android:layout_marginStart="@dimen/margin_10"
                     android:text="@string/home_fr_news"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/text_size_16"
+                    android:textSize="@dimen/text_size_14"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -70,11 +70,28 @@
     </com.google.android.material.appbar.AppBarLayout>
 
 
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:orientation="vertical">
+
+
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvLatestNews"
+        android:layout_marginStart="@dimen/margin_10"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="@dimen/text_size_14"
+
+        android:text="@string/home_fr_latest_news"/>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvLatestNews"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
+        />
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
