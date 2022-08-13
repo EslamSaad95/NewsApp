@@ -10,7 +10,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.news.R
 import com.example.news.databinding.FragmentHomeBinding
 import com.example.news.domain.common.ApiFailure
-import com.example.news.presentation.HorizontalMarginItemDecoration
+import com.example.news.presentation.common.HorizontalMarginItemDecoration
 import com.example.news.presentation.extensions.linearLayoutManager
 import com.example.news.presentation.extensions.visible
 import com.google.android.material.tabs.TabLayoutMediator
@@ -70,7 +70,7 @@ class HomeFragment : Fragment() {
                     R.drawable.ic_noconnection,
                     0,
                     0
-                );
+                )
             binding.tvErrorMsg.apply {
                 visible()
                 it.error?.let { text = it }

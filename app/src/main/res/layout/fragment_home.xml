@@ -62,10 +62,10 @@
 
                     <com.google.android.material.tabs.TabLayout
                         android:id="@+id/tbSlider"
-                        android:layout_width="0dp"
+                        android:layout_width="@dimen/_120sdp"
                         android:layout_height="wrap_content"
                         android:background="@color/transparent"
-                        android:maxWidth="@dimen/_90sdp"
+                        android:maxWidth="@dimen/_150sdp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/vpSlider"
