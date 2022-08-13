@@ -6,13 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.viewpager2.widget.MarginPageTransformer
+import androidx.viewpager.widget.ViewPager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.news.databinding.FragmentHomeBinding
+import com.example.news.presentation.HorizontalMarginItemDecoration
 import com.example.news.presentation.extensions.linearLayoutManager
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
-
+import kotlin.math.abs
+import com.example.news.R
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
@@ -55,14 +57,33 @@ class HomeFragment : Fragment() {
     }
 
     private fun initSliderVp() {
-        binding.apply {
-            vpSlider.adapter = sliderAdapter
-            vpSlider.orientation = ViewPager2.ORIENTATION_HORIZONTAL
-            TabLayoutMediator(tbSlider, vpSlider) { _, _ -> }.attach()
+
+
+        val nextItemVisiblePx = resources.getDimension(R.dimen.viewpager_next_item_visible)
+        val currentItemHorizontalMarginPx = resources.getDimension(R.dimen.viewpager_current_item_horizontal_margin)
+        val pageTranslationX = nextItemVisiblePx + currentItemHorizontalMarginPx
+        val pageTransformer = ViewPager2.PageTransformer { page: View, position: Float ->
+            page.translationX = -pageTranslationX * position
+            page.scaleY = 1 - (0.25f * abs(position))
         }
 
 
-        binding.vpSlider.setPageTransformer(MarginPageTransformer(1500));
+        val itemDecoration = HorizontalMarginItemDecoration(
+            requireContext(),
+            R.dimen.viewpager_current_item_horizontal_margin
+        )
+
+        binding.vpSlider.apply {
+            adapter = sliderAdapter
+            orientation = ViewPager2.ORIENTATION_HORIZONTAL
+            offscreenPageLimit = 1
+            setPageTransformer(pageTransformer)
+            addItemDecoration(itemDecoration)
+        }
+
+        TabLayoutMediator(binding.tbSlider, binding.vpSlider) { _, _ -> }.attach()
+
+
     }
 
 
