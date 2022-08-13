@@ -31,9 +31,9 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvResults"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clipToPadding="false"
             android:paddingVertical="@dimen/margin_8"
+            android:clipToPadding="false"
+            android:layout_height="wrap_content"
             android:visibility='@{viewModel.searchResultsLiveData.size()==0? View.GONE : View.VISIBLE}'
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/svNews" />
@@ -58,7 +58,6 @@
             android:paddingHorizontal="@dimen/margin_12"
             android:textAlignment="center"
             android:textColor="@color/black"
-            android:visibility='@{viewModel.searchResultsLiveData.size()!=0? View.GONE : View.VISIBLE}'
             app:drawableTopCompat="@drawable/ic_empty_search_results"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

@@ -1,5 +1,6 @@
 package com.example.news.presentation.search
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -28,15 +29,14 @@ class SearchViewModel @Inject constructor(private val useCase: SearchUseCase) : 
         queryMap["q"] = keyWord
         _loadingLiveData.value = true
         viewModelScope.launch {
-
             val response = useCase.getSearchResults(queryMap)
-
             response.value?.let {
                 _loadingLiveData.value = false
                 _searchResultsLiveData.value = it
             }
 
-            _errorLiveData.value?.let {
+
+            response.error?.let {
                 _loadingLiveData.value = false
                 _errorLiveData.value = it
             }

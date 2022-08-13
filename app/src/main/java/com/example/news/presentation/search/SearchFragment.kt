@@ -14,6 +14,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.news.R
 import com.example.news.databinding.FragmentSearchBinding
 import com.example.news.domain.common.ApiFailure
+import com.example.news.presentation.utils.extensions.gone
 import com.example.news.presentation.utils.extensions.hideKeyboard
 import com.example.news.presentation.utils.extensions.linearLayoutManager
 import com.example.news.presentation.utils.extensions.visible
@@ -25,7 +26,6 @@ class SearchFragment : Fragment() {
     private val binding by lazy { FragmentSearchBinding.inflate(layoutInflater) }
     private val viewModel by viewModels<SearchViewModel>()
     private val searchAdapter by lazy { SearchResultsRvAdapter() }
-    private lateinit var closeButton: ImageView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -56,14 +56,18 @@ class SearchFragment : Fragment() {
     private fun observeResultsLiveData() {
         viewModel.searchResultsLiveData.observe(viewLifecycleOwner) {
             it?.let {
-                searchAdapter.fill(it)
+                if (it.isEmpty())
+                        binding.tvEmpty.visible()
+                else {
+                    binding.tvEmpty.gone()
+                    searchAdapter.fill(it)
+                }
             }
         }
     }
 
     private fun observeErrorLiveData() {
         viewModel.errorLiveData.observe(viewLifecycleOwner) {
-
             if (it is ApiFailure.ConnectionError)
                 binding.tvError.setCompoundDrawablesWithIntrinsicBounds(
                     0,
@@ -73,6 +77,7 @@ class SearchFragment : Fragment() {
                 )
             else
                 binding.tvError.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0)
+
             binding.tvError.apply {
                 visible()
                 it.error?.let { text = it }
