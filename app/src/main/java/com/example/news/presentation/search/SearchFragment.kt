@@ -1,11 +1,14 @@
 package com.example.news.presentation.search
 
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import android.widget.ImageView
 import android.widget.SearchView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -27,6 +30,7 @@ class SearchFragment : Fragment() {
     private val viewModel by viewModels<SearchViewModel>()
     private val searchAdapter by lazy { SearchResultsRvAdapter() }
 
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -45,7 +49,6 @@ class SearchFragment : Fragment() {
         observeResultsLiveData()
         observeErrorLiveData()
         setViewsListeners()
-        setViewsClickListeners()
     }
 
     override fun onResume() {
@@ -88,39 +91,25 @@ class SearchFragment : Fragment() {
 
     private fun setViewsListeners() {
 
-        binding.svNews.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
-            androidx.appcompat.widget.SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String): Boolean {
-                if (query.isEmpty())
-                    Toast.makeText(
-                        requireContext(),
-                        getString(R.string.search_fr_validation_empty_keyword),
-                        Toast.LENGTH_LONG
-                    ).show()
-                else {
-                    requireActivity().hideKeyboard(requireView())
-                    viewModel.getSearchResults(query)
-
-                }
-                return false
+        binding.etNews.setOnEditorActionListener(TextView.OnEditorActionListener { v, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+          if(binding.etNews.text.toString().isEmpty())
+              Toast.makeText(
+                  requireContext(),
+                  getString(R.string.search_fr_validation_empty_keyword),
+                  Toast.LENGTH_LONG
+              ).show()
+                else
+          {
+              requireActivity().hideKeyboard(requireView())
+              viewModel.getSearchResults(v.text.toString())
+          }
+                return@OnEditorActionListener true
             }
-
-            override fun onQueryTextChange(query: String): Boolean {
-                // your code
-                return false
-            }
+            false
         })
 
-    }
 
-    private fun setViewsClickListeners() {
-        val searchCloseButtonId: Int = binding.svNews.context.resources
-            .getIdentifier("android:id/search_close_btn", null, null)
-        val closeButton: ImageView = binding.svNews.findViewById(searchCloseButtonId)
-        closeButton.setOnClickListener {
-            viewModel.getSearchResults("")
-            requireContext().hideKeyboard(requireView())
-        }
     }
 
 

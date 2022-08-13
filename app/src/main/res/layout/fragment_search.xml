@@ -18,25 +18,30 @@
         android:paddingVertical="@dimen/margin_8"
         tools:context="com.example.news.presentation.search.SearchFragment">
 
-        <SearchView
-            android:id="@+id/svNews"
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/etNews"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:iconifiedByDefault="false"
-            android:queryHint="@string/search_fr_search_here"
+            android:background="@drawable/rect_white_corners_6"
+            android:drawableStart="@drawable/ic_nav_search"
+            android:drawablePadding="@dimen/margin_8"
+            android:hint="@string/search_fr_search_here"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:paddingHorizontal="@dimen/margin_8"
+            android:paddingVertical="@dimen/margin_12"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:queryHint="search" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvResults"
             android:layout_width="match_parent"
-            android:paddingVertical="@dimen/margin_8"
-            android:clipToPadding="false"
             android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:paddingVertical="@dimen/margin_8"
             android:visibility='@{viewModel.searchResultsLiveData.size()==0? View.GONE : View.VISIBLE}'
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/svNews" />
+            app:layout_constraintTop_toBottomOf="@id/etNews" />
 
         <ProgressBar
             android:id="@+id/progressbar"
@@ -58,6 +63,7 @@
             android:paddingHorizontal="@dimen/margin_12"
             android:textAlignment="center"
             android:textColor="@color/black"
+            android:visibility="gone"
             app:drawableTopCompat="@drawable/ic_empty_search_results"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

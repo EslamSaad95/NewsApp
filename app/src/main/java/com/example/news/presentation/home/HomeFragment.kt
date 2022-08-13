@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -26,6 +27,7 @@ class HomeFragment : Fragment() {
     private val sliderAdapter by lazy { SliderVpAdapter() }
     private val viewModel by viewModels<HomeViewModel>()
     private val latestNewsAdapter by lazy { LatestNewsRvAdapter() }
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
