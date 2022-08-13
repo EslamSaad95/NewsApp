@@ -16,8 +16,6 @@
     <!--region HomeFragment-->
     <string name="home_fr_news">News</string>
     <string name="home_fr_latest_news">Latest News</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <!--endregion-->
 
 

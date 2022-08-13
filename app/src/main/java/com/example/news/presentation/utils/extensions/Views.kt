@@ -1,4 +1,4 @@
-package com.example.news.presentation.extensions
+package com.example.news.presentation.utils.extensions
 
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager

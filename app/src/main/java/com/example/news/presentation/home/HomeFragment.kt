@@ -10,9 +10,9 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.news.R
 import com.example.news.databinding.FragmentHomeBinding
 import com.example.news.domain.common.ApiFailure
-import com.example.news.presentation.common.HorizontalMarginItemDecoration
-import com.example.news.presentation.extensions.linearLayoutManager
-import com.example.news.presentation.extensions.visible
+import com.example.news.presentation.utils.common.HorizontalMarginItemDecoration
+import com.example.news.presentation.utils.extensions.linearLayoutManager
+import com.example.news.presentation.utils.extensions.visible
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.math.abs

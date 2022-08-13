@@ -1,4 +1,4 @@
-package com.example.news.presentation.common
+package com.example.news.presentation.utils.common
 
 import android.content.Context
 import android.graphics.Rect
