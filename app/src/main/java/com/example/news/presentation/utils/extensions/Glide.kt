@@ -9,5 +9,6 @@ import com.example.news.R
 fun ImageView.load(imageUrl: String, radius: Int = 1) {
     Glide.with(this).load(imageUrl)
         .placeholder(R.drawable.ic_placeholder)
+        . error(R.drawable.ic_placeholder)
         .apply(RequestOptions.bitmapTransform(RoundedCorners(radius))).into(this)
 }

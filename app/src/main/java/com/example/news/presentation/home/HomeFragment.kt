@@ -82,6 +82,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun initSliderVp() {
+
         val nextItemVisiblePx = resources.getDimension(R.dimen.viewpager_next_item_visible)
         val currentItemHorizontalMarginPx =
             resources.getDimension(R.dimen.viewpager_current_item_horizontal_margin)
@@ -91,19 +92,24 @@ class HomeFragment : Fragment() {
             page.scaleY = 1 - (0.25f * abs(position))
         }
 
-
         val itemDecoration = HorizontalMarginItemDecoration(
             requireContext(),
             R.dimen.viewpager_current_item_horizontal_margin
         )
 
-        binding.vpSlider.apply {
-            adapter = sliderAdapter
-            orientation = ViewPager2.ORIENTATION_HORIZONTAL
-            offscreenPageLimit = 1
-            setPageTransformer(pageTransformer)
-            addItemDecoration(itemDecoration)
+
+
+        if(binding.vpSlider.itemDecorationCount==0)
+        {
+            binding.vpSlider.apply {
+                adapter = sliderAdapter
+                orientation = ViewPager2.ORIENTATION_HORIZONTAL
+                offscreenPageLimit = 1
+                setPageTransformer(pageTransformer)
+                addItemDecoration(itemDecoration)
+            }
         }
+
 
         TabLayoutMediator(binding.tbSlider, binding.vpSlider) { _, _ -> }.attach()
         sliderAdapter.setOnClickListener { _, item, _ ->

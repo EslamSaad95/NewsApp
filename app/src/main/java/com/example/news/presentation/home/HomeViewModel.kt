@@ -13,7 +13,7 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(private val useCase: TopHeadlinesUseCase):ViewModel() {
 
-    private val _egyptNewsLiveData by lazy { MutableLiveData<List<EgyptNewsEntity>>() }
+    private val _egyptNewsLiveData by lazy { MutableLiveData<List<TopHeadlinesEntity>>() }
     val egyptNewsLiveData get() = _egyptNewsLiveData
 
     private val _latestNewsLiveData by lazy { MutableLiveData<List<TopHeadlinesEntity>>() }
