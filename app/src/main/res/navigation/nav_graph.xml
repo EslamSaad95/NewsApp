@@ -10,13 +10,15 @@
         android:id="@+id/home"
         android:name="com.example.news.presentation.home.HomeFragment"
         android:label="@string/home_fr_news"
-        tools:layout="@layout/fragment_home" >
+        tools:layout="@layout/fragment_home">
 
         <argument
             android:name="showToolbar"
             android:defaultValue="false" />
 
-        <action android:id="@+id/actionHomeToNewsDetails" app:destination="@id/newsDetails"/>
+        <action
+            android:id="@+id/actionHomeToNewsDetails"
+            app:destination="@id/newsDetails" />
     </fragment>
     <fragment
         android:id="@+id/search"
@@ -26,13 +28,27 @@
     <fragment
         android:id="@+id/wishlist"
         android:name="com.example.news.presentation.wishlist.WishlistFragment"
-        android:label="fragment_wishlist"
-        tools:layout="@layout/fragment_wishlist" />
+        android:label=""
+        tools:layout="@layout/fragment_wishlist">
+        <argument
+            android:name="showToolbar"
+            android:defaultValue="false" />
+    </fragment>
     <fragment
         android:id="@+id/newsDetails"
         android:name="com.example.news.presentation.newsDetails.NewsDetailsFragment"
         android:label=""
-        tools:layout="@layout/fragment_news_details" />
+        tools:layout="@layout/fragment_news_details">
+
+        <argument
+            android:name="showToolbar"
+            android:defaultValue="true" />
+
+
+        <action
+            android:id="@+id/actionNewsDetailsToWishlist"
+            app:destination="@id/wishlist" />
+    </fragment>
 
 
 </navigation>

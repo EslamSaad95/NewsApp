@@ -13,6 +13,6 @@
 
     <item
         android:id="@+id/wishlist"
-        android:icon="@drawable/ic_nav_wishlist"
+        android:icon="@drawable/ic_nav_wishlist_gray"
         android:title="" />
 </menu>
