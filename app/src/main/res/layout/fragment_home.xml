@@ -1,103 +1,136 @@
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.news.presentation.home.HomeFragment">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <com.google.android.material.appbar.AppBarLayout
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.news.presentation.home.HomeViewModel" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        tools:context="com.example.news.presentation.home.HomeFragment">
 
-        <com.google.android.material.appbar.CollapsingToolbarLayout
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/cultured"
+                android:fitsSystemWindows="true"
+                app:expandedTitleMarginEnd="@dimen/margin_10"
+                app:expandedTitleMarginStart="@dimen/margin_10"
+                app:layout_collapseMode="parallax"
+                app:layout_scrollFlags="scroll|enterAlwaysCollapsed|exitUntilCollapsed|snap"
+                app:titleEnabled="false">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tvTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:paddingHorizontal="@dimen/margin_12"
+                        android:paddingVertical="@dimen/margin_12"
+                        android:text="@string/home_fr_news"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_16"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.viewpager2.widget.ViewPager2
+                        android:id="@+id/vpSlider"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_140sdp"
+                        android:layout_marginTop="@dimen/margin_12"
+                        android:background="@color/cultured"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvTitle"
+                        tools:background="@android:color/holo_red_light" />
+
+                    <com.google.android.material.tabs.TabLayout
+                        android:id="@+id/tbSlider"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:background="@color/transparent"
+                        android:maxWidth="@dimen/_90sdp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/vpSlider"
+                        app:tabBackground="@drawable/selector_tabs_home"
+                        app:tabGravity="center"
+                        app:tabIndicator="@android:color/transparent"
+                        app:tabIndicatorHeight="0dp"
+                        app:tabMaxWidth="@dimen/_10sdp"
+                        app:tabMode="scrollable"
+                        app:tabPadding="@dimen/_2sdp"
+                        app:tabPaddingStart="0dp" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/cultured"
-            android:fitsSystemWindows="true"
-            app:expandedTitleMarginEnd="@dimen/margin_10"
-            app:expandedTitleMarginStart="@dimen/margin_10"
-            app:layout_collapseMode="parallax"
-            app:layout_scrollFlags="scroll|enterAlwaysCollapsed|exitUntilCollapsed|snap"
-            app:titleEnabled="false">
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/margin_12"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvLatestNews"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/home_fr_latest_news"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_14"
+                android:visibility='@{viewModel.latestNewsEntity.size()==0? View.GONE : View.VISIBLE}'
+                android:textStyle="bold" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvLatestNews"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_10" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tvTitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:paddingHorizontal="@dimen/margin_12"
-                    android:paddingVertical="@dimen/margin_12"
-                    android:text="@string/home_fr_news"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/text_size_16"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <androidx.viewpager2.widget.ViewPager2
-                    android:id="@+id/vpSlider"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_140sdp"
-                    android:layout_marginTop="@dimen/margin_12"
-                    android:background="@color/cultured"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tvTitle"
-                    tools:background="@android:color/holo_red_light" />
-
-                <com.google.android.material.tabs.TabLayout
-                    android:id="@+id/tbSlider"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:background="@color/transparent"
-                    android:maxWidth="@dimen/_90sdp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/vpSlider"
-                    app:tabBackground="@drawable/selector_tabs_home"
-                    app:tabGravity="center"
-                    app:tabIndicator="@android:color/transparent"
-                    app:tabIndicatorHeight="0dp"
-                    app:tabMaxWidth="@dimen/_10sdp"
-                    app:tabMode="scrollable"
-                    app:tabPadding="@dimen/_2sdp"
-                    app:tabPaddingStart="0dp" />
-
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
-
-    </com.google.android.material.appbar.AppBarLayout>
-
-
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingHorizontal="@dimen/margin_12"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvLatestNews"
+        <ProgressBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/home_fr_latest_news"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_14"
+            android:layout_gravity="center"
+            tools:visibility="gone"
+            android:visibility='@{viewModel.loadingLiveData.booleanValue()==false? View.GONE : View.VISIBLE}'
+            android:id="@+id/progressbar" />
 
-            android:textStyle="bold" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvLatestNews"
-            android:layout_width="match_parent"
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_10" />
-    </androidx.appcompat.widget.LinearLayoutCompat>
+            android:id="@+id/tvErrorMsg"
+            android:layout_gravity="center"
+            android:textColor="@color/black"
+            android:paddingHorizontal="@dimen/margin_12"
+            android:textAlignment="center"
+            android:visibility="gone"
+          />
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

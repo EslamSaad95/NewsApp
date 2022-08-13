@@ -6,15 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.viewpager.widget.ViewPager
 import androidx.viewpager2.widget.ViewPager2
+import com.example.news.R
 import com.example.news.databinding.FragmentHomeBinding
+import com.example.news.domain.common.ApiFailure
 import com.example.news.presentation.HorizontalMarginItemDecoration
 import com.example.news.presentation.extensions.linearLayoutManager
+import com.example.news.presentation.extensions.visible
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.math.abs
-import com.example.news.R
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
@@ -34,8 +35,13 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        with(binding) {
+            lifecycleOwner = viewLifecycleOwner
+            viewModel = this@HomeFragment.viewModel
+        }
         observeEgyptNewsSliderLiveData()
         observeLatestNewsLiveData()
+        observeErrorLiveData()
     }
 
 
@@ -46,12 +52,29 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun observeLatestNewsLiveData()
-    {
-        viewModel.latestNewsEntity.observe(viewLifecycleOwner){
+    private fun observeLatestNewsLiveData() {
+        viewModel.latestNewsEntity.observe(viewLifecycleOwner) {
             it?.let {
                 latestNewsAdapter.fill(it)
                 initLatestNewsRv()
+            }
+        }
+    }
+
+    private fun observeErrorLiveData() {
+        viewModel.errorLiveData.observe(viewLifecycleOwner) {
+
+            if (it is ApiFailure.ConnectionError)
+                binding.tvErrorMsg.setCompoundDrawablesWithIntrinsicBounds(
+                    0,
+                    R.drawable.ic_noconnection,
+                    0,
+                    0
+                );
+            binding.tvErrorMsg.apply {
+                visible()
+                it.error?.let { text = it }
+                it.errorResId?.let { text = getText(it) }
             }
         }
     }
@@ -60,7 +83,8 @@ class HomeFragment : Fragment() {
 
 
         val nextItemVisiblePx = resources.getDimension(R.dimen.viewpager_next_item_visible)
-        val currentItemHorizontalMarginPx = resources.getDimension(R.dimen.viewpager_current_item_horizontal_margin)
+        val currentItemHorizontalMarginPx =
+            resources.getDimension(R.dimen.viewpager_current_item_horizontal_margin)
         val pageTranslationX = nextItemVisiblePx + currentItemHorizontalMarginPx
         val pageTransformer = ViewPager2.PageTransformer { page: View, position: Float ->
             page.translationX = -pageTranslationX * position

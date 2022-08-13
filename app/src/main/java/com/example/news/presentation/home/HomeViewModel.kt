@@ -23,9 +23,6 @@ class HomeViewModel @Inject constructor(private val useCase: TopHeadlinesUseCase
     private val _loadingLiveData by lazy { MutableLiveData<Boolean>() }
     val loadingLiveData get() = _loadingLiveData
 
-    private val _noInternetConnectionLiveData by lazy { MutableLiveData<ApiFailure>() }
-    val noInternetConnectionLiveData get() = _noInternetConnectionLiveData
-
     private val _errorLiveData by lazy { MutableLiveData<ApiFailure>() }
     val errorLiveData get() = _errorLiveData
 
@@ -49,13 +46,10 @@ class HomeViewModel @Inject constructor(private val useCase: TopHeadlinesUseCase
             response.value?.let { _egyptNewsLiveData.value=it }
 
             response.error?.let {
-                when(it) {
-                    is ApiFailure.ConnectionError -> _noInternetConnectionLiveData.value = it
-                    else -> { _errorLiveData.value=it }
-                }
+                     _errorLiveData.value=it }
             }
         }
-    }
+
 
     private fun getLatestNews(){
         val queryMap by lazy { HashMap<String,String>() }
@@ -69,10 +63,7 @@ class HomeViewModel @Inject constructor(private val useCase: TopHeadlinesUseCase
             response.value?.let { _latestNewsLiveData.value=it }
 
             response.error?.let {
-                when(it) {
-                    is ApiFailure.ConnectionError -> _noInternetConnectionLiveData.value = it
-                    else -> { _errorLiveData.value=it }
-                }
+                _errorLiveData.value=it
             }
         }
     }
