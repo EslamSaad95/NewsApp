@@ -7,11 +7,12 @@
 
         <variable
             name="news"
-            type="com.example.news.domain.entity.EgyptNewsEntity" />
+            type="com.example.news.domain.entity.LatestNewsEntity" />
     </data>
 
     <FrameLayout
         android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/margin_12"
         android:layout_height="wrap_content">
 
 

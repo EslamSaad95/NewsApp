@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.viewpager2.widget.ViewPager2
 import com.example.news.databinding.FragmentHomeBinding
+import com.example.news.presentation.extensions.linearLayoutManager
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -18,6 +19,7 @@ class HomeFragment : Fragment() {
     private val binding by lazy { FragmentHomeBinding.inflate(layoutInflater) }
     private val sliderAdapter by lazy { SliderVpAdapter() }
     private val viewModel by viewModels<HomeViewModel>()
+    private val latestNewsAdapter by lazy { LatestNewsRvAdapter() }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,16 +35,14 @@ class HomeFragment : Fragment() {
     }
 
 
-    private fun observeEgyptNewsSliderLiveData()
-    {
-        viewModel.egyptNewsLiveData.observe(viewLifecycleOwner){
+    private fun observeEgyptNewsSliderLiveData() {
+        viewModel.egyptNewsLiveData.observe(viewLifecycleOwner) {
             sliderAdapter.fill(it)
             initSliderVp()
         }
     }
 
-    private fun initSliderVp()
-    {
+    private fun initSliderVp() {
         binding.apply {
             vpSlider.adapter = sliderAdapter
             vpSlider.orientation = ViewPager2.ORIENTATION_HORIZONTAL
@@ -76,6 +76,13 @@ class HomeFragment : Fragment() {
         }
     }
 
+
+    private fun initLatestNewsRv() {
+        binding.rvLatestNews.apply {
+            linearLayoutManager()
+            adapter = latestNewsAdapter
+        }
+    }
 
 
 }
