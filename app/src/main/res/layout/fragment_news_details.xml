@@ -1,10 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".presentation.newsDetails.NewsDetailsFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="news"
+            type="com.example.news.domain.entity.TopHeadlinesEntity" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.newsDetails.NewsDetailsFragment">
+
+        <FrameLayout
+            android:id="@+id/flHeader"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_130sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivNews"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                app:imageUrlR15="@{news.imageUrl}"
+                tools:background="@color/black" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:layout_margin="@dimen/margin_8"
+                android:text="@{news.date}"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_12"
+                tools:text="News Date" />
+        </FrameLayout>
 
 
+        <View
+            android:id="@+id/viewOrange"
+            android:layout_width="@dimen/_4sdp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/margin_12"
+            android:background="@android:color/holo_orange_light"
+            app:layout_constraintBottom_toBottomOf="@id/tvNewsTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tvNewsTitle" />
 
-</FrameLayout>
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvNewsTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_8"
+            android:layout_marginTop="@dimen/margin_18"
+            android:text="@{news.title}"
+            android:textAlignment="viewStart"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_14"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/viewOrange"
+            app:layout_constraintTop_toBottomOf="@id/flHeader"
+            tools:text="News Title" />
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_12"
+            android:textColor="@color/dimGray"
+            android:textSize="@dimen/text_size_12"
+            app:layout_constraintStart_toStartOf="@id/viewOrange"
+            app:layout_constraintTop_toBottomOf="@id/tvNewsTitle"
+            app:scrollText="@{news.description}"
+            tools:text="News Description" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
