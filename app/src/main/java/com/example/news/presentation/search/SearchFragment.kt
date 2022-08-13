@@ -19,6 +19,7 @@ import com.example.news.presentation.utils.extensions.linearLayoutManager
 import com.example.news.presentation.utils.extensions.visible
 import dagger.hilt.android.AndroidEntryPoint
 
+
 @AndroidEntryPoint
 class SearchFragment : Fragment() {
     private val binding by lazy { FragmentSearchBinding.inflate(layoutInflater) }
@@ -87,9 +88,11 @@ class SearchFragment : Fragment() {
     }
 
     private fun setViewsListeners() {
-        binding.svNews.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(p0: String?): Boolean {
-                if (p0.isNullOrEmpty())
+
+        binding.svNews.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
+            androidx.appcompat.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                if (query.isEmpty())
                     Toast.makeText(
                         requireContext(),
                         getString(R.string.search_fr_validation_empty_keyword),
@@ -97,22 +100,24 @@ class SearchFragment : Fragment() {
                     ).show()
                 else {
                     requireActivity().hideKeyboard(requireView())
-                    viewModel.getSearchResults(p0)
+                    viewModel.getSearchResults(query)
 
                 }
                 return false
             }
 
-            override fun onQueryTextChange(p0: String?): Boolean {
+            override fun onQueryTextChange(query: String): Boolean {
+                // your code
                 return false
             }
         })
+
     }
 
     private fun setViewsClickListeners() {
-        val closeId: Int = binding.svNews.context.resources
+        val searchCloseButtonId: Int = binding.svNews.getContext().getResources()
             .getIdentifier("android:id/search_close_btn", null, null)
-         closeButton = binding.svNews.findViewById(closeId)
+        val closeButton:ImageView = binding.svNews.findViewById(searchCloseButtonId)
         closeButton.setOnClickListener {
             viewModel.getSearchResults("")
             requireContext().hideKeyboard(requireView())
