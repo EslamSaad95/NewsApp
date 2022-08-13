@@ -24,7 +24,17 @@
         android:id="@+id/search"
         android:name="com.example.news.presentation.search.SearchFragment"
         android:label="fragment_search"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_search" >
+
+        <argument
+            android:name="showToolbar"
+            android:defaultValue="false" />
+
+        <action
+            android:id="@+id/actionSearchToNewsDetails"
+            app:destination="@id/newsDetails" />
+
+    </fragment>
     <fragment
         android:id="@+id/wishlist"
         android:name="com.example.news.presentation.wishlist.WishlistFragment"
