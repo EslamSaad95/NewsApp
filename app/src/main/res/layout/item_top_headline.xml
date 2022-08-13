@@ -8,7 +8,7 @@
 
        <variable
            name="news"
-           type="com.example.news.domain.entity.EgyptNewsEntity" />
+           type="com.example.news.domain.entity.TopHeadlinesEntity" />
     </data>
 
     <FrameLayout

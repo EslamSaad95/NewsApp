@@ -80,8 +80,6 @@ class HomeFragment : Fragment() {
     }
 
     private fun initSliderVp() {
-
-
         val nextItemVisiblePx = resources.getDimension(R.dimen.viewpager_next_item_visible)
         val currentItemHorizontalMarginPx =
             resources.getDimension(R.dimen.viewpager_current_item_horizontal_margin)
