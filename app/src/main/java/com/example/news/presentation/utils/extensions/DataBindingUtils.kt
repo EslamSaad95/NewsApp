@@ -20,8 +20,11 @@ fun loadImageR15(view: ImageView, url: String?) {
 
 @BindingAdapter("scrollText")
 fun scrollText(textView: MaterialTextView, content: String?) {
-  textView.apply {
-      textView.text=content.toString()
-      movementMethod = ScrollingMovementMethod()
-  }
+    content?.let {
+        textView.apply {
+            textView.text=content.toString()
+            movementMethod = ScrollingMovementMethod()
+        }
+    }
+
 }
