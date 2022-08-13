@@ -12,6 +12,9 @@
         android:label="@string/home_fr_news"
         tools:layout="@layout/fragment_home" >
 
+        <argument
+            android:name="showToolbar"
+            android:defaultValue="false" />
     </fragment>
     <fragment
         android:id="@+id/search"
