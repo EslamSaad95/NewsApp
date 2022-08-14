@@ -40,15 +40,14 @@ class SearchViewModel @Inject constructor(
         _loadingLiveData.value = true
         viewModelScope.launch {
 
-            val response = useCase.getSearchResults(queryMap)
-            response.collect { responseFlow ->
-                responseFlow.value?.let {
+            useCase.getSearchResults(queryMap).collect { response ->
+                response.value?.let {
                     _loadingLiveData.value = false
                     _searchResultsLiveData.value = it
                 }
 
 
-                responseFlow.error?.let {
+                response.error?.let {
                     _loadingLiveData.value = false
                     _errorLiveData.value = it
                 }

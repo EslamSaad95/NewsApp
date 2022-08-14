@@ -18,7 +18,7 @@ class SearchUseCase @Inject constructor(
         if (favResults.isNotEmpty()) {
             favResults.forEach { favNews ->
                 searchResults.value?.forEach { newsEntity ->
-                    if (favNews.isFav == newsEntity.isFav)
+                    if (favNews.title == newsEntity.title)
                         newsEntity.isFav = true
                 }
 

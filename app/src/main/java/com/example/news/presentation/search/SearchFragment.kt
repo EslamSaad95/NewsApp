@@ -89,6 +89,7 @@ class SearchFragment : Fragment() {
         viewModel.snackBarLiveData.observe(viewLifecycleOwner) {
             it?.let {
                 binding.etNews.showLongSnackBar(it)
+                viewModel.snackBarLiveData.value = null
             }
         }
     }
@@ -132,7 +133,7 @@ class SearchFragment : Fragment() {
         }
         searchAdapter.setOnClickListener { clickedView, item, position ->
             if (clickedView.id == R.id.ivFav) {
-                if (item.isFav)
+                if (item.isFav.not())
                     viewModel.addToDatabase(item, position)
                 else
                     viewModel.removeFromDatabase(item, position)

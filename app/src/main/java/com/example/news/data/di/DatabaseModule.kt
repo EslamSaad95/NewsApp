@@ -2,11 +2,8 @@ package com.example.news.data.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.news.data.repository.NewsDbRepoImpl
 import com.example.news.data.room.NewsDao
 import com.example.news.data.room.NewsDatabase
-import com.example.news.domain.repository.NewsDataBaseRepo
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,15 +13,11 @@ import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
 @Module
-abstract class DatabaseModule {
+class DatabaseModule {
     @Provides
     fun provideChannelDao(appDatabase: NewsDatabase): NewsDao {
         return appDatabase.newsDao()
     }
-
-    @Singleton
-    @Binds
-    abstract fun provideDBRepo(repo: NewsDbRepoImpl): NewsDataBaseRepo
 
 
     @Provides

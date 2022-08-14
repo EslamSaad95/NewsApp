@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -15,6 +14,7 @@ import com.example.news.databinding.FragmentHomeBinding
 import com.example.news.domain.common.ApiFailure
 import com.example.news.presentation.utils.common.HorizontalMarginItemDecoration
 import com.example.news.presentation.utils.extensions.linearLayoutManager
+import com.example.news.presentation.utils.extensions.showLongSnackBar
 import com.example.news.presentation.utils.extensions.visible
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
@@ -46,8 +46,27 @@ class HomeFragment : Fragment() {
         observeEgyptNewsSliderLiveData()
         observeLatestNewsLiveData()
         observeErrorLiveData()
+        observeSnackBarLiveData()
+        observeFavItemLiveData()
     }
 
+    private fun observeSnackBarLiveData() {
+        viewModel.snackBarLiveData.observe(viewLifecycleOwner) {
+            it?.let {
+                binding.rvLatestNews.showLongSnackBar(it)
+                viewModel.snackBarLiveData.value = null
+            }
+        }
+    }
+
+    private fun observeFavItemLiveData() {
+        viewModel.favItemUpdateLiveData.observe(viewLifecycleOwner) {
+            it?.let { favCheck ->
+                latestNewsAdapter.getItem(position = favCheck.position).isFav = favCheck.isFav
+                latestNewsAdapter.notifyItemChanged(favCheck.position)
+            }
+        }
+    }
 
     private fun observeEgyptNewsSliderLiveData() {
         viewModel.egyptNewsLiveData.observe(viewLifecycleOwner) {
@@ -103,8 +122,7 @@ class HomeFragment : Fragment() {
 
 
 
-        if(binding.vpSlider.itemDecorationCount==0)
-        {
+        if (binding.vpSlider.itemDecorationCount == 0) {
             binding.vpSlider.apply {
                 adapter = sliderAdapter
                 orientation = ViewPager2.ORIENTATION_HORIZONTAL
@@ -116,11 +134,18 @@ class HomeFragment : Fragment() {
 
 
         TabLayoutMediator(binding.tbSlider, binding.vpSlider) { _, _ -> }.attach()
-        sliderAdapter.setOnClickListener { _, item, _ ->
-            findNavController().navigate(
-                R.id.actionHomeToNewsDetails,
-                bundleOf("detailsObj" to item)
-            )
+        sliderAdapter.setOnClickListener { clickedView, item, position ->
+
+            if (clickedView.id == R.id.ivFav) {
+                if (item.isFav.not())
+                    viewModel.addToDatabase(item, position)
+                else
+                    viewModel.removeFromDatabase(item, position)
+            } else
+                findNavController().navigate(
+                    R.id.actionHomeToNewsDetails,
+                    bundleOf("detailsObj" to item)
+                )
         }
 
 
@@ -132,11 +157,17 @@ class HomeFragment : Fragment() {
             linearLayoutManager()
             adapter = latestNewsAdapter
         }
-        latestNewsAdapter.setOnClickListener { _, item, _ ->
-            findNavController().navigate(
-                R.id.actionHomeToNewsDetails,
-                bundleOf("detailsObj" to item)
-            )
+        latestNewsAdapter.setOnClickListener { clickedView, item, position ->
+            if (clickedView.id == R.id.ivFav) {
+                if (item.isFav.not())
+                    viewModel.addToDatabase(item, position)
+                else
+                    viewModel.removeFromDatabase(item, position)
+            } else
+                findNavController().navigate(
+                    R.id.actionHomeToNewsDetails,
+                    bundleOf("detailsObj" to item)
+                )
         }
     }
 

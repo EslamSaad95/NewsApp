@@ -64,12 +64,13 @@
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/ivFav"
-                    android:layout_width="@dimen/_14sdp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
                     android:layout_marginTop="@dimen/margin_12"
+                    android:padding="@dimen/margin_4"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tvNewsTitle"
-                    app:srcCompat='@{news.isFav().booleanValue()==true? "@drawable/ic_nav_wishlist_gray" : "@drawable/ic_wishlist_orange"}' />
+                    app:srcCompat="@drawable/ic_nav_wishlist_gray" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
