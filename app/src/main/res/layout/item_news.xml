@@ -56,10 +56,10 @@
                     android:textAlignment="viewStart"
                     android:textColor="@color/dimGray"
                     android:textSize="@dimen/text_size_10"
+                    app:layout_constraintBottom_toBottomOf="@id/ivFav"
                     app:layout_constraintEnd_toStartOf="@id/ivFav"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@id/ivFav"
-                    app:layout_constraintBottom_toBottomOf="@id/ivFav"
                     tools:text="14 minutes" />
 
                 <androidx.appcompat.widget.AppCompatImageView
@@ -69,7 +69,7 @@
                     android:layout_marginTop="@dimen/margin_12"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tvNewsTitle"
-                    app:srcCompat="@drawable/ic_nav_wishlist_gray" />
+                    app:srcCompat='@{news.isFav().booleanValue()==true? "@drawable/ic_nav_wishlist_gray" : "@drawable/ic_wishlist_orange"}' />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

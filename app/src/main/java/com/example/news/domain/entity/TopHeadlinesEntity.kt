@@ -5,9 +5,9 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class TopHeadlinesEntity(
-    val imageUrl:String?="",
-    val title:String?="",
-    val isFav:Boolean?=false,
-    val date:String?,
-    val description:String?=""
+    val imageUrl: String? = "",
+    val title: String,
+    var isFav: Boolean = false,
+    val date: String?,
+    val description: String? = ""
 ):Parcelable

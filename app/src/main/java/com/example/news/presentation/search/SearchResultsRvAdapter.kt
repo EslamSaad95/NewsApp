@@ -9,6 +9,9 @@ class SearchResultsRvAdapter : BaseAdapter<ItemNewsBinding, TopHeadlinesEntity>(
         binding.apply {
             news = item
             root.setOnClickListener { onViewClicked(it, item, position) }
+            ivFav.setOnClickListener {
+                onViewClicked(it, item, position)
+            }
         }
     }
 }
