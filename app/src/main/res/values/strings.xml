@@ -22,8 +22,11 @@
     <string name="search_fr_empty_search_results">No results</string>
     <string name="search_fr_validation_empty_keyword">Please enter search keyword</string>
     <string name="search_fr_search_here">Search here</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!--endregion-->
+
+    <!--region WishlistFragment-->
+    <string name="wishlist_fr_title">Wishlist</string>
+    <string name="wishlist_fr_empty_mg">Empty wishlist</string>
     <!--endregion-->
 
 
