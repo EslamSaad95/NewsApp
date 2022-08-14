@@ -12,6 +12,7 @@ import com.example.news.databinding.FragmentWishlistBinding
 class WishlistFragment : Fragment() {
     private val binding by lazy { FragmentWishlistBinding.inflate(layoutInflater) }
     private val viewModel by viewModels<WishlistViewModel>()
+    private val wishlistRvAdapter by lazy { WishlistRvAdapter() }
 
 
     override fun onCreateView(
