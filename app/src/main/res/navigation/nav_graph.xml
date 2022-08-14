@@ -43,6 +43,7 @@
         <argument
             android:name="showToolbar"
             android:defaultValue="false" />
+        <action android:id="@+id/actionWishlistToNewsDetails" app:destination="@id/newsDetails"/>
     </fragment>
     <fragment
         android:id="@+id/newsDetails"

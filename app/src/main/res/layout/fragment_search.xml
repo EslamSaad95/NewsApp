@@ -64,6 +64,7 @@
             android:textAlignment="center"
             android:textColor="@color/black"
             android:visibility="gone"
+            android:text="@string/search_fr_empty_search_results"
             app:drawableTopCompat="@drawable/ic_empty_search_results"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
