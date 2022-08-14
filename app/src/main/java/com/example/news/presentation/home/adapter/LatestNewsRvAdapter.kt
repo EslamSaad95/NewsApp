@@ -1,4 +1,4 @@
-package com.example.news.presentation.home
+package com.example.news.presentation.home.adapter
 
 import androidx.core.content.ContextCompat
 import com.example.news.R

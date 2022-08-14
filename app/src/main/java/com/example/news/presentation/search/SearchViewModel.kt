@@ -61,9 +61,9 @@ class SearchViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 dbUseCase.addTeam(entity)
-                _favItemUpdateLiveData.value = FavCheckDataClass(true, position)
+                _favItemUpdateLiveData.value = FavCheckDataClass(entity.title, true, position)
             } catch (e: Exception) {
-                _favItemUpdateLiveData.value = FavCheckDataClass(false, position)
+                _favItemUpdateLiveData.value = FavCheckDataClass(entity.title, false, position)
                 _snackBarLiveData.value = e.message.toString()
             }
         }
@@ -72,10 +72,10 @@ class SearchViewModel @Inject constructor(
     fun removeFromDatabase(entity: TopHeadlinesEntity, position: Int) {
         viewModelScope.launch {
             try {
-                _favItemUpdateLiveData.value = FavCheckDataClass(false, position)
+                _favItemUpdateLiveData.value = FavCheckDataClass(entity.title, false, position)
                 dbUseCase.removeFromTeams(entity)
             } catch (e: Exception) {
-                _favItemUpdateLiveData.value = FavCheckDataClass(true, position)
+                _favItemUpdateLiveData.value = FavCheckDataClass(entity.title, true, position)
                 _snackBarLiveData.value = e.message.toString()
             }
         }

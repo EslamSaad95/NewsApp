@@ -12,6 +12,8 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.news.R
 import com.example.news.databinding.FragmentHomeBinding
 import com.example.news.domain.common.ApiFailure
+import com.example.news.presentation.home.adapter.LatestNewsRvAdapter
+import com.example.news.presentation.home.adapter.SliderVpAdapter
 import com.example.news.presentation.utils.common.HorizontalMarginItemDecoration
 import com.example.news.presentation.utils.extensions.linearLayoutManager
 import com.example.news.presentation.utils.extensions.showLongSnackBar
@@ -62,8 +64,14 @@ class HomeFragment : Fragment() {
     private fun observeFavItemLiveData() {
         viewModel.favItemUpdateLiveData.observe(viewLifecycleOwner) {
             it?.let { favCheck ->
-                latestNewsAdapter.getItem(position = favCheck.position).isFav = favCheck.isFav
-                latestNewsAdapter.notifyItemChanged(favCheck.position)
+                val isSliderContainsItem =
+                    sliderAdapter.getCurrentItems().any { i -> i.title == it.title }
+                if (isSliderContainsItem) {
+                    sliderAdapter.getItem(position = favCheck.position).isFav = favCheck.isFav
+                } else {
+                    latestNewsAdapter.getItem(position = favCheck.position).isFav = favCheck.isFav
+                    latestNewsAdapter.notifyItemChanged(favCheck.position)
+                }
             }
         }
     }

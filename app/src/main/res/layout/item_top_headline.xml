@@ -20,7 +20,7 @@
             android:layout_height="match_parent"
             android:scaleType="fitXY"
             tools:background="@android:color/holo_green_dark"
-            app:imageUrlR15="@{news.imageUrl}"/>
+            app:imageUrlR15="@{news.imageUrl}" />
 
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
@@ -29,7 +29,17 @@
             android:textSize="@dimen/text_size_12"
             tools:text="20-6-2022"
             android:layout_marginVertical="@dimen/margin_8"
-            android:layout_marginHorizontal="@dimen/margin_8"/>
+            android:layout_marginHorizontal="@dimen/margin_8" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivFav"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:layout_gravity="end"
+            android:layout_marginTop="@dimen/margin_6"
+            android:layout_marginEnd="@dimen/margin_6"
+            android:padding="@dimen/margin_4"
+            app:srcCompat="@drawable/ic_nav_wishlist_gray" />
 
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
