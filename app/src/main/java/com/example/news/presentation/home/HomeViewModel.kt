@@ -71,12 +71,13 @@ class HomeViewModel @Inject constructor(
 
         _loadingLiveData.value = true
         viewModelScope.launch {
-            _loadingLiveData.value = false
-
             useCase.getLatestNews(queryMap).collect { response ->
-                response.value?.let { _latestNewsLiveData.value = it }
+                response.value?.let {
+                    _loadingLiveData.value = false
+                    _latestNewsLiveData.value = it }
 
                 response.error?.let {
+                    _loadingLiveData.value = false
                     _errorLiveData.value = it
                 }
             }

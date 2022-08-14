@@ -28,7 +28,8 @@ class WishlistViewModel @Inject constructor(private val dbUseCase: NewsDataBaseU
     val favItemUpdateLiveData get() = _favItemUpdateLiveData
 
 
-    private fun getFavNews() {
+
+     fun getFavNews() {
         _loadingLiveData.value = true
         viewModelScope.launch {
 

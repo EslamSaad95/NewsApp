@@ -133,10 +133,14 @@ class SearchFragment : Fragment() {
         }
         searchAdapter.setOnClickListener { clickedView, item, position ->
             if (clickedView.id == R.id.ivFav) {
-                if (item.isFav.not())
+                if (item.isFav.not()) {
+                    item.isFav=true
                     viewModel.addToDatabase(item, position)
-                else
+                }
+                else {
+                    item.isFav=false
                     viewModel.removeFromDatabase(item, position)
+                }
             } else
                 findNavController().navigate(
                     R.id.actionSearchToNewsDetails,

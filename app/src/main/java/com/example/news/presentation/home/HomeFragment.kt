@@ -12,6 +12,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.news.R
 import com.example.news.databinding.FragmentHomeBinding
 import com.example.news.domain.common.ApiFailure
+import com.example.news.domain.entity.TopHeadlinesEntity
 import com.example.news.presentation.home.adapter.LatestNewsRvAdapter
 import com.example.news.presentation.home.adapter.SliderVpAdapter
 import com.example.news.presentation.utils.common.HorizontalMarginItemDecoration
@@ -68,6 +69,7 @@ class HomeFragment : Fragment() {
                     sliderAdapter.getCurrentItems().any { i -> i.title == it.title }
                 if (isSliderContainsItem) {
                     sliderAdapter.getItem(position = favCheck.position).isFav = favCheck.isFav
+                    sliderAdapter.notifyItemChanged(favCheck.position)
                 } else {
                     latestNewsAdapter.getItem(position = favCheck.position).isFav = favCheck.isFav
                     latestNewsAdapter.notifyItemChanged(favCheck.position)
@@ -146,9 +148,9 @@ class HomeFragment : Fragment() {
 
             if (clickedView.id == R.id.ivFav) {
                 if (item.isFav.not())
-                    viewModel.addToDatabase(item, position)
+                    addToDataBase(item,position)
                 else
-                    viewModel.removeFromDatabase(item, position)
+                removeFromDatabase(item, position)
             } else
                 findNavController().navigate(
                     R.id.actionHomeToNewsDetails,
@@ -168,9 +170,9 @@ class HomeFragment : Fragment() {
         latestNewsAdapter.setOnClickListener { clickedView, item, position ->
             if (clickedView.id == R.id.ivFav) {
                 if (item.isFav.not())
-                    viewModel.addToDatabase(item, position)
+                    addToDataBase(item, position)
                 else
-                    viewModel.removeFromDatabase(item, position)
+                    removeFromDatabase(item, position)
             } else
                 findNavController().navigate(
                     R.id.actionHomeToNewsDetails,
@@ -179,5 +181,16 @@ class HomeFragment : Fragment() {
         }
     }
 
+    private fun addToDataBase(item:TopHeadlinesEntity,position:Int)
+    {
+        item.isFav=true
+        viewModel.addToDatabase(item, position)
+    }
+
+    private fun removeFromDatabase(item:TopHeadlinesEntity,position:Int)
+    {
+        item.isFav=false
+        viewModel.removeFromDatabase(item, position)
+    }
 
 }

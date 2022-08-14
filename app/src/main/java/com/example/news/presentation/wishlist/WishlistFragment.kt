@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -14,7 +15,11 @@ import com.example.news.presentation.utils.extensions.linearLayoutManager
 import com.example.news.presentation.utils.extensions.showLongSnackBar
 import com.example.news.presentation.utils.extensions.visible
 import com.example.news.R
+import com.example.news.domain.entity.TopHeadlinesEntity
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.lifecycle.HiltViewModel
 
+@AndroidEntryPoint
 class WishlistFragment : Fragment() {
     private val binding by lazy { FragmentWishlistBinding.inflate(layoutInflater) }
     private val viewModel by viewModels<WishlistViewModel>()
@@ -31,10 +36,10 @@ class WishlistFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.getFavNews()
         observeWishlistLiveData()
         observeFavItemLiveData()
         observeSnackBarLiveData()
-        initWishlistRv()
     }
 
     private fun observeSnackBarLiveData()
@@ -47,13 +52,9 @@ class WishlistFragment : Fragment() {
     {
         viewModel.favNewsLiveData.observe(viewLifecycleOwner){
             it?.let {
-                if(it.isEmpty())
-                binding.tvEmpty.visible()
-                else
-                {
-                    binding.tvEmpty.gone()
-                    wishlistRvAdapter.fill(it)
-                }
+                checkEmptyFavNews(it.size)
+                wishlistRvAdapter.fill(it)
+                initWishlistRv()
             }
         }
     }
@@ -61,8 +62,8 @@ class WishlistFragment : Fragment() {
     private fun observeFavItemLiveData() {
         viewModel.favItemUpdateLiveData.observe(viewLifecycleOwner) {
             it?.let { favCheck ->
-                wishlistRvAdapter.getItem(position = favCheck.position).isFav = favCheck.isFav
-                wishlistRvAdapter.notifyItemChanged(favCheck.position)
+                wishlistRvAdapter.removeItem(it.position)
+                checkEmptyFavNews(wishlistRvAdapter.itemCount)
             }
         }
     }
@@ -82,11 +83,18 @@ class WishlistFragment : Fragment() {
                     viewModel.removeFromDatabase(item, position)
             } else
                 findNavController().navigate(
-                    R.id.actionHomeToNewsDetails,
+                    R.id.actionWishlistToNewsDetails,
                     bundleOf("detailsObj" to item)
                 )
         }
     }
+private fun checkEmptyFavNews(count:Int)
+{
+    if(count==0)
+        binding.tvEmpty.visible()
+    else
+        binding.tvEmpty.gone()
 
+}
 
 }
